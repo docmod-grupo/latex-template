@@ -1,0 +1,81 @@
+from            : markdown+raw_tex+escaped_line_breaks
+to              : latex
+standalone      : true
+file-scope      : true
+pdf-engine      : xelatex
+fail-if-warnings: false
+cite-method     : citeproc
+filters:
+  - pandoc-crossref
+  - citeproc
+template        : "default.latex"
+variables:
+  fontsize      : 12pt
+  mainfont      : "EBGaramond12"
+  mainfontoptions:
+    - Extension      = {.otf}
+    - UprightFont    = {*-Regular}
+    - ItalicFont     = *-Italic
+    - Numbers        = {Lowercase,Proportional}
+    - Ligatures      = {Required,Common,Contextual}
+    - Path           = {./fonts/}
+  sansfont      : "UnBPro"
+  sansfontoptions:
+    - Extension      = {.otf}
+    - UprightFont    = {*_Regular}
+    - BoldFont       = {*_Black}
+    - Numbers        = {Lining,Proportional}
+    - Ligatures      = {Required,Common,Contextual}
+    - Path           = {./fonts/}
+  monofont      : "EBGaramond12"
+  monofontoptions:
+    - Extension      = {.otf}
+    - UprightFont    = {*-Regular}
+    - ItalicFont     = {*-Italic}
+    - Letters        = {SmallCaps,UppercaseSmallCaps}
+    - Path           = {./fonts/}
+  indent: true
+  header-includes: |
+    \usepackage{academicons}
+    \usepackage{graphicx}
+    \usepackage{multicol}
+    \setlength{\columnsep}{15pt}
+    \usepackage{csquotes}
+    \usepackage[overload]{textcase}
+    \newcommand\ctosc[1]{\textsc{\MakeTextLowercase{#1}}}
+
+    \newfontfamily \titlingfont{CormorantUpright}[%
+      Extension     = {.otf},%
+      UprightFont   = {*-Light},%
+      ItalicFont    = {CormorantGaramond-Light},%
+      BoldFont      = {*-Medium},%
+      BoldItalicFont= {CormorantGaramond-Medium},%
+      Numbers       = {Lining,Proportional},%
+      Ligatures     = {Required,Common,Contextual,Historic,Rare},%
+      Path          = {./fonts/}%
+      ]
+
+    \usepackage{titling}
+    \pretitle{\begin{flushleft}\includegraphics[height=0.75cm]{media/as_comp_cor.pdf}~\\[0.25cm]\includegraphics[height=1.5cm]{media/docmod-comp-h-c.pdf}~\\[1cm]\Huge\titlingfont}
+    \posttitle{\end{flushleft}\vspace{2em}}
+    \preauthor{\begin{flushleft}\Large\titlingfont\itshape}
+    \postauthor{\par\end{flushleft}}
+    \predate{\begin{flushleft}\large\titlingfont\itshape}
+    \postdate{\end{flushleft} \vfill}
+
+    \usepackage{titlesec,titletoc}
+    \titlecontents{chapter}[0pt]{\addvspace{1em} \large}{\thecontentslabel \quad\enspace{\hspace*{-0.2em}}}{}{\titlerule*[0.25pc]{ }\thecontentspage}[\addvspace{1em}]
+    \titlecontents{section}[0pt]{\itshape}{\thecontentslabel \quad{\hspace*{-0.2em}}}{}{\titlerule*[0.25pc]{ }\thecontentspage}[\addvspace{0.5em}]
+    \titleformat{\chapter}[block]{\relax\titlingfont\huge}{\thechapter\quad}{0pt}{}[\vspace{2em}]
+    \titleformat{\section}[hang]{\Large\titlingfont}{\thesection}{1em}{}[]
+    \titleformat{\subsection}[hang]{\large\titlingfont\bfseries}{}{1em}{}[]
+    \titleformat{\paragraph}[runin]{\titlingfont\bfseries}{}{0pt}{}[]
+    \titlespacing{\paragraph}{0pt}{1em}{0.5ex}
+    \titleformat{\subparagraph}[runin]{\addfontfeature{Letters=UppercaseSmallCaps}}{}{0pt}{}[]
+    \titlespacing{\subparagraph}{0pt}{1em}{0.5ex}
+    
+    \usepackage{enumitem}
+    \setlist{font=\titlingfont\bfseries}
+    \setlist[itemize,1]{label=$›$}
+
+    \usepackage{fancyhdr}
